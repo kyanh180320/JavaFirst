@@ -1,0 +1,64 @@
+### JetBrains IDE (IntelliJ IDEA) ###
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+gen/
+
+### Eclipse IDE ###
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~
+.settings/
+.loadpath
+.project
+.classpath
+.factorypath
+
+### Visual Studio Code ###
+.vscode/
+
+### Build Tools (Maven) ###
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+
+### Build Tools (Gradle) ###
+.gradle
+/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+### Logs ###
+*.log
+logs/
+
+### OS generated files ###
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V10
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+### Cấu hình bảo mật (Quan trọng) ###
+*.jks
+*.p12
+*.key
+*.pem
+# Không nên push file chứa mật khẩu/token
+application-local.properties
+application-dev.yml
+.env
