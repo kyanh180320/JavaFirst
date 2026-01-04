@@ -1,14 +1,12 @@
 package com.example.SpringTut.controller;
 
 import com.example.SpringTut.dto.request.request.UserCreationRequest;
-
 import com.example.SpringTut.dto.request.request.UserUpdateRequest;
 import com.example.SpringTut.model.User;
 import com.example.SpringTut.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.List;
 
@@ -29,17 +27,17 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    User getUser(@PathVariable("userId") String userId){
+    User getUser(@PathVariable("userId") Integer userId){
         return userService.getUser(userId);
     }
 
     @PutMapping("/{userId}")
-    User updateUser(@PathVariable String userId, @RequestBody UserUpdateRequest request){
+    User updateUser(@PathVariable Integer userId, @RequestBody UserUpdateRequest request){
         return userService.updateUser(userId, request);
     }
 
     @DeleteMapping("/{userId}")
-    String deleteUser(@PathVariable String userId){
+    String deleteUser(@PathVariable Integer userId){
         userService.deleteUser(userId);
         return "User has been deleted";
     }

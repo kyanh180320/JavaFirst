@@ -3,69 +3,52 @@ package com.example.SpringTut.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
-import java.util.UUID;
+import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "users")
 @Getter
 @Setter
-@Table(name = "tbl_user")
 public class User {
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
-    private String username;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Column(name = "fullname", length = 100, columnDefinition = "VARCHAR(100) DEFAULT ''")
+    private String fullname;
+
+    @Column(name = "phone_number", length = 10, nullable = false)
+    private String phoneNumber;
+
+    @Column(name = "address", length = 200, columnDefinition = "VARCHAR(200) DEFAULT ''")
+    private String address;
+
+    @Column(name = "password", length = 100, nullable = false, columnDefinition = "VARCHAR(100) NOT NULL DEFAULT ''")
     private String password;
-    private String firstName;
-    private String lastName;
-    private LocalDate dob;
 
-    public String getId() {
-        return id;
-    }
+    @Column(name = "created_at")
+    @CreationTimestamp
+    private LocalDateTime createdAt;
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    @Column(name = "updated_at")
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
-    public String getUsername() {
-        return username;
-    }
+    @Column(name = "is_active")
+    private Boolean isActive;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    @Column(name = "date_of_birth")
+    private LocalDate dateOfBirth;
 
-    public String getPassword() {
-        return password;
-    }
+    @Column(name = "facebook_account_id", columnDefinition = "INT DEFAULT 0")
+    private Integer facebookAccountId;
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public LocalDate getDob() {
-        return dob;
-    }
-
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
-    }
+    @Column(name = "google_account_id", columnDefinition = "INT DEFAULT 0")
+    private Integer googleAccountId;
 }
