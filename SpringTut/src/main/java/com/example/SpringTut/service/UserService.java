@@ -1,16 +1,54 @@
 package com.example.SpringTut.service;
 
-import com.example.SpringTut.dto.request.UserRequestDTO;
-import com.example.SpringTut.dto.response.PageResponse;
-import com.example.SpringTut.dto.response.UserDetailResponse;
-import com.example.SpringTut.util.UserStatus;
+import com.example.SpringTut.dto.request.request.UserCreationRequest;
 
-public interface UserService {
-    
-   long saveUser(UserRequestDTO request);
-   void updateUser(long userId, UserRequestDTO request);
-   void changeStatus(long userId, UserStatus status);
-   void deleteUser(long userId);
-   UserDetailResponse getUser(long userId);
-//   PageResponse getAllUser(int pageNo, int pageSize);
+
+import com.example.SpringTut.dto.request.request.UserUpdateRequest;
+import com.example.SpringTut.model.User;
+import com.example.SpringTut.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class UserService {
+   @Autowired
+   private UserRepository userRepository;
+
+   public User createUser(UserCreationRequest request){
+      User user = new User();
+
+      user.setUsername(request.getUsername());
+      user.setPassword(request.getPassword());
+      user.setFirstName(request.getFirstName());
+      user.setLastName(request.getLastName());
+      user.setDob(request.getDob());
+
+      return userRepository.save(user);
+   }
+
+   public User updateUser(String userId, UserUpdateRequest request) {
+      User user = getUser(userId);
+
+      user.setPassword(request.getPassword());
+      user.setFirstName(request.getFirstName());
+      user.setLastName(request.getLastName());
+      user.setDob(request.getDob());
+
+      return userRepository.save(user);
+   }
+
+   public void deleteUser(String userId){
+      userRepository.deleteById(userId);
+   }
+
+   public List<User> getUsers(){
+      return userRepository.findAll();
+   }
+
+   public User getUser(String id){
+      return userRepository.findById(id)
+              .orElseThrow(() -> new RuntimeException("User not found"));
+   }
 }

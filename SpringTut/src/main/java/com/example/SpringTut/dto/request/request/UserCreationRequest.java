@@ -1,33 +1,15 @@
-package com.example.SpringTut.model;
+package com.example.SpringTut.dto.request.request;
 
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+
 
 import java.time.LocalDate;
-import java.util.UUID;
 
-@Entity
-@Getter
-@Setter
-@Table(name = "tbl_user")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+public class UserCreationRequest {
     private String username;
     private String password;
     private String firstName;
     private String lastName;
     private LocalDate dob;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getUsername() {
         return username;
