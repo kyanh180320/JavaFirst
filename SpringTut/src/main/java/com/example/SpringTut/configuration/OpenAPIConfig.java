@@ -21,7 +21,7 @@ public class OpenAPIConfig {
     public GroupedOpenApi publicApi(@Value("${openapi.service.api-docs}") String apiDocs) {
         return GroupedOpenApi.builder()
                 .group(apiDocs) // /v3/api-docs/api-service
-                .packagesToScan("vn.tayjava.controller")
+                .packagesToScan("com.example.SpringTut.controller")
                 .build();
     }
 
@@ -29,7 +29,7 @@ public class OpenAPIConfig {
     public OpenAPI openAPI(
             @Value("${openapi.service.title}") String title,
             @Value("${openapi.service.version}") String version,
-            @Value("${openapi.service.server}") String serverUrl) {
+            @Value("${openapi.service.serverUrl}") String serverUrl) {
         return new OpenAPI()
                 .servers(List.of(new Server().url(serverUrl)))
                 .info(new Info().title(title)
