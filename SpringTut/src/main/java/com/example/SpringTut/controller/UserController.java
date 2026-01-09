@@ -6,6 +6,7 @@ import com.example.SpringTut.dto.request.request.UserUpdateRequest;
 import com.example.SpringTut.model.User;
 import com.example.SpringTut.service.UserService;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    User createUser(@RequestBody UserCreationRequest request){
+    User createUser(@RequestBody @Valid UserCreationRequest request){
         return userService.createUser(request);
     }
 
