@@ -13,18 +13,11 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "tbl_user")
-public class User extends  EntityBase implements Serializable {
+@Table(name = "tbl_test")
+public class Test extends  EntityBase implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "email", unique = true)
-    private String email;
-
-
+    private  int number;
 
 }
