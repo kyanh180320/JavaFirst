@@ -4,6 +4,8 @@ import com.example.SpringTut.dto.request.request.UserCreationRequest;
 
 
 import com.example.SpringTut.dto.request.request.UserUpdateRequest;
+import com.example.SpringTut.exception.AppException;
+import com.example.SpringTut.exception.ErrorCode;
 import com.example.SpringTut.model.User;
 import com.example.SpringTut.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,7 @@ public class UserService {
       User user = new User();
 
       if(userRepository.existsByUsername(request.getUsername()))
-         throw new RuntimeException("User existed");
+         throw new AppException(ErrorCode.USER_EXISTED);
       user.setUsername(request.getUsername());
       user.setPassword(request.getPassword());
       user.setFirstName(request.getFirstName());

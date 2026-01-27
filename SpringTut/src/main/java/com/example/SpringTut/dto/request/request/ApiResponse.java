@@ -11,8 +11,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL) // field nào null thì không hiện
 public class ApiResponse<T> {
-    private  int code = 1000;
-    private  String message = "done";
+    private  int code;
+    private  String message;
     private T result;
 
 }
