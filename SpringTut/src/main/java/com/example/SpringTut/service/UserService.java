@@ -6,6 +6,7 @@ import com.example.SpringTut.dto.request.request.UserCreationRequest;
 import com.example.SpringTut.dto.request.request.UserUpdateRequest;
 import com.example.SpringTut.model.User;
 import com.example.SpringTut.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,44 +14,23 @@ import java.util.List;
 
 @Service
 public class UserService {
-   @Autowired
-   private UserRepository userRepository;
+    @Autowired
+    private final UserRepository userRepository;
 
-   public User createUser(UserCreationRequest request){
-      User user = new User();
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
-      if(userRepository.existsByUsername(request.getUsername()))
-         throw new RuntimeException("User existed");
-      user.setUsername(request.getUsername());
-      user.setPassword(request.getPassword());
-      user.setFirstName(request.getFirstName());
-      user.setLastName(request.getLastName());
-      user.setDob(request.getDob());
+    public User createUser(User user) {
+        if (userRepository.existsByUsername(user.getUsername())) {
+            throw new IllegalArgumentException("Username already exists");        }
+        if(userRepository.existsByEmail(user.getEmail()))
+        {
+            throw new IllegalArgumentException("Email alreade exists");
+        }
+        return userRepository.save(user);
 
-      return userRepository.save(user);
-   }
+    }
 
-   public User updateUser(String userId, UserUpdateRequest request) {
-      User user = getUser(userId);
 
-      user.setPassword(request.getPassword());
-      user.setFirstName(request.getFirstName());
-      user.setLastName(request.getLastName());
-      user.setDob(request.getDob());
-
-      return userRepository.save(user);
-   }
-
-   public void deleteUser(String userId){
-      userRepository.deleteById(userId);
-   }
-
-   public List<User> getUsers(){
-      return userRepository.findAll();
-   }
-
-   public User getUser(String id){
-      return userRepository.findById(id)
-              .orElseThrow(() -> new RuntimeException("User not found"));
-   }
 }
