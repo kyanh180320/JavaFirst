@@ -27,19 +27,17 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     boolean existsByEmail(String email);
 
-    long countByActive(boolean status);
+    long countByActiveTrue();
 
-    //Custom JPQL
-//    @Query("SELECT u FROM User WHERE u.createdAt >= :date ")
-//    List<User> findUsersCreatedAfter(@Param("date") LocalDateTime date);
-
+   // Custom JPQL
     @Query("SELECT u FROM User u WHERE u.createdAt >= :date")
     List<User> findUsersCreatedAfter(@Param("date") LocalDateTime date);
 
+//    @Query(value = "SELECT * FROM users WHERE active = true AND created_at >= :date",
+//            nativeQuery = true)
+//    List<User> findActiveUsersCreatedAfter(@Param("date") LocalDateTime date);
 
-    @Query(value = "SELECT * FROM users WHERE active = true AND created_at >= :date",
-            nativeQuery = true)
-    List<User> findActiveUsersCreatedAfter(@Param("date") LocalDateTime date);
+
 
 
 }
