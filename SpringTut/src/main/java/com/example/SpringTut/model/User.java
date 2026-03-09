@@ -1,71 +1,37 @@
 package com.example.SpringTut.model;
 
+import com.example.SpringTut.constants.Const.UserStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.time.LocalDate;
-import java.util.UUID;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
+@Table(name = "users")
 @Getter
 @Setter
-@Table(name = "tbl_user")
-public class User {
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class User extends BaseEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, unique = true, length = 50)
     private String username;
-    private String password;
-    private String firstName;
-    private String lastName;
-    private LocalDate dob;
 
-    public String getId() {
-        return id;
-    }
+    @Column(nullable = false, unique = true, length = 100)
+    private String email;
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    @Column(name = "full_name", nullable = false, length = 100)
+    private String fullName;
 
-    public String getUsername() {
-        return username;
-    }
+    @Column(columnDefinition = "TEXT")
+    private String bio;
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public LocalDate getDob() {
-        return dob;
-    }
-
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
-    }
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
 }

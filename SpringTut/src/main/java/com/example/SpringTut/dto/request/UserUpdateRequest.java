@@ -1,27 +1,12 @@
-package com.example.SpringTut.dto.request.request;
-
-
-
-import jakarta.validation.constraints.Size;
+package com.example.SpringTut.dto.request;
 
 import java.time.LocalDate;
 
-public class UserCreationRequest {
-    @Size(min = 3,message = "USERNAME_INVALID")
-    private String username;
-    @Size(min = 8, message = "INVALID_PASSWORD")
+public class UserUpdateRequest {
     private String password;
     private String firstName;
     private String lastName;
     private LocalDate dob;
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
 
     public String getPassword() {
         return password;
