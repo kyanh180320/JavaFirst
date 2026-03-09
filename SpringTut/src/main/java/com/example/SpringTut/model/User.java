@@ -7,6 +7,9 @@ import lombok.Setter;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 @Entity
 @Table(name = "users")
 @Getter
@@ -34,4 +37,10 @@ public class User extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private UserStatus status;
+
+    @Column(name = "passWord")
+    private String passWord ;
+
+    @Column(name = "last_login_at")
+    private LocalDateTime lastLoginAt;
 }
